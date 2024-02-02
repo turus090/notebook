@@ -3,10 +3,13 @@ import { FC } from "react";
 import { useState } from "react";
 import { View, Text, Pressable, StyleSheet } from "react-native";
 
-const Switch: FC = () => {
+const Switch: FC<any> = ({ navigation }) => {
   const [btnActive, setBtnActive] = useState<string>("shedule");
-  const pressBtn = (newActive) => {
+  const pressBtn: (arg0: string) => void = (newActive) => {
     setBtnActive(newActive);
+    setTimeout(() => {
+      navigation.navigate(`${newActive === "notes" ? "notes" : "calendar"}`);
+    }, 500);
   };
   return (
     <View style={s.container}>

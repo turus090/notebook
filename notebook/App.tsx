@@ -14,24 +14,35 @@ import {
 } from "react-native";
 import StartScreen from "./screens/start";
 import CalendarScreen from "./screens/calendar";
+import NoteScreen from "./screens/note";
+
+import { Provider } from "react-redux";
+import store from "./redux/store";
 
 const App: FC = () => {
   const Stack = createNativeStackNavigator();
   return (
-    <NavigationContainer>
-      <Stack.Navigator initialRouteName="start">
-        <Stack.Screen
-          name="main"
-          component={StartScreen}
-          options={{ headerShown: false }}
-        />
-        <Stack.Screen
-          name="calendar"
-          component={CalendarScreen}
-          options={{ headerShown: false }}
-        />
-      </Stack.Navigator>
-    </NavigationContainer>
+    <Provider store={store}>
+      <NavigationContainer>
+        <Stack.Navigator initialRouteName="main">
+          <Stack.Screen
+            name="main"
+            component={StartScreen}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name="calendar"
+            component={CalendarScreen}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name="notes"
+            component={NoteScreen}
+            options={{ headerShown: false }}
+          />
+        </Stack.Navigator>
+      </NavigationContainer>
+    </Provider>
   );
 };
 export default App;
